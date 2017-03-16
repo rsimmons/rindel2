@@ -49,4 +49,8 @@ export class Stream {
       delete this.dependentTasks[priority];
     }
   }
+
+  hasDependentTasks() {
+    return (Object.keys(this.dependentTasks).length > 0);
+  }
 }

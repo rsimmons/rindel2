@@ -41,6 +41,14 @@ const runProgram = (program) => {
   if (currentActivation) {
     currentActivation.deactivate();
   }
+
+  // sanity check: make sure all input streams now have no dependent tasks
+  for (const k in inputStreams) {
+    if (inputStreams[k].hasDependentTasks()) {
+      throw new Error('program did not fully deactivate?');
+    }
+  }
+
   stringOutputElem.style.display = 'none';
   positionOutputElem.style.display = 'none';
 
