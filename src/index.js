@@ -27,15 +27,33 @@ const displayOutput = () => {
   }
 };
 
-const inputUpdated = () => {
+const getTime = () => {
+  return 0.001*Date.now();
+}
+
+let rafID;
+const runProgram = () => {
+  if (!currentActivation) {
+    return;
+  }
+
+  inputStreams.time.setValue(getTime());
+
   runtime.run();
 
-  if (currentActivation) {
-    displayOutput();
+  // If program depends on time input, and no outstanding call to requestAnimationFrame already, call to schedule
+  if (inputStreams.time.hasDependentTasks() && !rafID) {
+    rafID = window.requestAnimationFrame((highResTime) => {
+      rafID = null;
+      runProgram();
+    });
   }
+
+  displayOutput();
 };
 
-const inputStreams = createUserInputStreams(runtime, inputUpdated);
+const inputStreams = createUserInputStreams(runtime, runProgram);
+inputStreams.time = runtime.createStream(getTime());
 
 const startProgram = (program) => {
   if (currentActivation) {
@@ -66,7 +84,7 @@ const startProgram = (program) => {
     default:
       throw new Error('unrecognized interpretation');
   }
-  displayOutput();
+  runProgram();
 }
 
 for (const prog of testPrograms) {

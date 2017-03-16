@@ -30,5 +30,8 @@ const lift = (f) => {
 
 export default {
   add: lift((a, b) => (a + b)),
+  mul: lift((a, b) => (a * b)),
   Position: lift((x, y) => ({x, y})),
+  sin: lift(x => Math.sin(x)),
+  cos: lift(x => Math.cos(x)),
 }
