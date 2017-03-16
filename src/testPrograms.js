@@ -11,7 +11,7 @@ export default [
         ['const', 100],
         ['const', builtins.add],
         ['capp', [2, [0, 1]]],
-      ])(runtime, [inputStreams.user.mouseX], '');
+      ])(runtime, [inputStreams.mouseX], '');
     },
   },
 
@@ -24,7 +24,7 @@ export default [
         ['arg', 1],
         ['const', builtins.add],
         ['capp', [2, [0, 1]]],
-      ])(runtime, [inputStreams.user.mouseX, inputStreams.user.mouseY], '');
+      ])(runtime, [inputStreams.mouseX, inputStreams.mouseY], '');
     },
   },
 
@@ -34,7 +34,7 @@ export default [
     activate: (runtime, inputStreams) => {
       return defineActivator([
         ['arg', 0],
-      ])(runtime, [inputStreams.user.mousePos], '');
+      ])(runtime, [inputStreams.mousePos], '');
     },
   },
 
@@ -47,7 +47,7 @@ export default [
         ['arg', 1],
         ['const', builtins.Position],
         ['capp', [2, [1, 0]]],
-      ])(runtime, [inputStreams.user.mouseX, inputStreams.user.mouseY], '');
+      ])(runtime, [inputStreams.mouseX, inputStreams.mouseY], '');
     },
   },
 ]

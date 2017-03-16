@@ -35,9 +35,7 @@ const inputUpdated = () => {
   }
 };
 
-const inputStreams = {
-  user: createUserInputStreams(runtime, inputUpdated),
-};
+const inputStreams = createUserInputStreams(runtime, inputUpdated);
 
 const runProgram = (program) => {
   if (currentActivation) {
