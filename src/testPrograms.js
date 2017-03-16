@@ -1,3 +1,4 @@
+import builtins from './builtins';
 import defineActivator from './defineActivator';
 
 export default [
@@ -8,7 +9,8 @@ export default [
       return defineActivator([
         ['arg', 0],
         ['const', 100],
-        ['prim', ['add', [0, 1]]],
+        ['const', builtins.add],
+        ['capp', [2, [0, 1]]],
       ])(runtime, [inputStreams.user.mouseX], '');
     },
   },
@@ -20,7 +22,8 @@ export default [
       return defineActivator([
         ['arg', 0],
         ['arg', 1],
-        ['prim', ['add', [0, 1]]],
+        ['const', builtins.add],
+        ['capp', [2, [0, 1]]],
       ])(runtime, [inputStreams.user.mouseX, inputStreams.user.mouseY], '');
     },
   },

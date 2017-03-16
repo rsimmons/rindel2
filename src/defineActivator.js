@@ -18,10 +18,13 @@ export default (registerDefs) => {
           regs.push(runtime.createStream(opArg));
           break;
 
-        case 'prim':
-          const [primName, primArgs] = opArg;
+        // constant application, meaning function to be applied is a constant-stream (with value being an activator).
+        //  both function and arguments are register indexes
+        case 'capp':
+          const [cappActivatorReg, cappArgsRegs] = opArg;
           const actPriority = priority + zeroPad(regs.length, paddedPriorityLength); // make zero-padded priority value for this primitive activation
-          const activation = runtime.primActivators[primName](runtime, primArgs.map(x => regs[x]), actPriority);
+          const cappActivator = regs[cappActivatorReg].value; // We get the current value because this is assumed to be a constant-stream
+          const activation = cappActivator(runtime, cappArgsRegs.map(x => regs[x]), actPriority);
           regs.push(activation.outputStream);
           if (activation.deactivate) {
             deactivators.push(activation.deactivate);
