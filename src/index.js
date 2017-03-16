@@ -37,7 +37,7 @@ const inputUpdated = () => {
 
 const inputStreams = createUserInputStreams(runtime, inputUpdated);
 
-const runProgram = (program) => {
+const startProgram = (program) => {
   if (currentActivation) {
     currentActivation.deactivate();
   }
@@ -76,7 +76,7 @@ for (const prog of testPrograms) {
   (() => {
     anchorElem.addEventListener('click', (e) => {
       e.preventDefault();
-      runProgram(prog);
+      startProgram(prog);
     });
   })();
 
@@ -86,4 +86,4 @@ for (const prog of testPrograms) {
   programListElem.appendChild(itemElem);
 }
 
-runProgram(testPrograms[0]);
+startProgram(testPrograms[0]);
