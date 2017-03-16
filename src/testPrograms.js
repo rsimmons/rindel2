@@ -37,4 +37,17 @@ export default [
       ])(runtime, [inputStreams.user.mousePos], '');
     },
   },
+
+  {
+    name: 'follow mouse with x/y swapped',
+    outputInterpretation: 'position',
+    activate: (runtime, inputStreams) => {
+      return defineActivator([
+        ['arg', 0],
+        ['arg', 1],
+        ['const', builtins.Position],
+        ['capp', [2, [1, 0]]],
+      ])(runtime, [inputStreams.user.mouseX, inputStreams.user.mouseY], '');
+    },
+  },
 ]

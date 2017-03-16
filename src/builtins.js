@@ -30,4 +30,5 @@ const lift = (f) => {
 
 export default {
   add: lift((a, b) => (a + b)),
+  Position: lift((x, y) => ({x, y})),
 }
